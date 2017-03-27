@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./lib",
-    "reactNamespace": "react"
+    "rootDir": "src",
+    "outDir": "lib",
+    "target": "es5",
+    "reactNamespace": "react",
+    "sourceMap": false
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "example"
   ]
 }
