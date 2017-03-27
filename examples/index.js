@@ -1,9 +1,9 @@
-import moo from '../lib'
+import cans from '../lib'
 import { BrowserRouter, Route } from '../router'
 import React from 'react'
 import { observable, action } from '../mobx'
 
-const app = moo()
+const app = cans()
 
 const counterStore = observable({
   namespace: 'counterStore',

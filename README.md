@@ -1,15 +1,15 @@
-# Moo
+# cans
 
 Building MobX in Choo way
 
 ## Quick Demo
 
 ```js
-import moo from 'moo'
-import { observable, action } from 'moo/mobx' // MobX core
-import { BrowserRouter, Route } from 'moo/router' // react-router(v4) core
+import cans from 'cans'
+import { observable, action } from 'cans/mobx' // MobX core
+import { BrowserRouter, Route } from 'cans/router' // react-router(v4) core
 
-const app = moo()
+const app = cans()
 
 // MobX observable
 const counterStore = observable({
@@ -56,9 +56,9 @@ app.start(document.querySelector('#app'))
 
 ## APIs
 
-#### `moo()`
+#### `cans()`
 
-Create new Moo application instance.
+Create new `cans` application instance.
 
 #### `app.store(MobXObservable)`
 

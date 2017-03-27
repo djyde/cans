@@ -3,15 +3,15 @@ import { render } from 'react-dom'
 import { IObservable, observable } from 'mobx'
 import { Observer, inject, Provider, observer } from 'mobx-react'
 
-export interface IMooObservable extends IObservable {
+export interface ICansObservable extends IObservable {
   namespace: string
 }
 
-export class Moo {
+export class Cans {
 
-  private __routerComponent: JSX.Element = React.createElement('div', null, 'moo')
+  private __routerComponent: JSX.Element = React.createElement('div', null, 'cans')
   private __mountedRoot?: HTMLElement
-  private stores: IMooObservable[] = []
+  private stores: ICansObservable[] = []
 
   private __getInjectList () {
     return this.stores.map(store => store.namespace).filter(_ => _)
@@ -26,7 +26,7 @@ export class Moo {
     this.__routerComponent = React.createElement(Provider, providerProps, routeFunc())
   }
 
-  store (store: IMooObservable) {
+  store (store: ICansObservable) {
     this.stores.push(store)
   }
 
@@ -36,16 +36,16 @@ export class Moo {
   }
 
   observer (view) {
-    const injection = inject((stores: IMooObservable[]) => ({ stores: stores }))
+    const injection = inject((stores: ICansObservable[]) => ({ stores: stores }))
     return injection(observer(view))
   }
 }
 
-const createMooApp = () => {
-  return new Moo()
+const createCansApp = () => {
+  return new Cans()
 }
 
-export default createMooApp
+export default createCansApp
 
 declare var module: any
-module.exports = createMooApp
+module.exports = createCansApp

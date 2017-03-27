@@ -1,4 +1,4 @@
-import moo from '../lib'
+import valina from '../lib'
 import { observable, action } from '../mobx'
 import React from 'react'
 import assert from 'power-assert'
@@ -6,11 +6,11 @@ import { mount, shallow } from 'enzyme'
 
 import { BrowserRouter, Route } from '../router'
 
-describe('moo', () => {
+describe('cans', () => {
 
   let app
 
-  const App = () => <div>moo index</div>
+  const App = () => <div>cans index</div>
 
   const router = () => (
     <BrowserRouter>
@@ -21,7 +21,7 @@ describe('moo', () => {
   const rootEl = document.querySelector('#app')
 
   beforeEach(() => {
-    app = moo()
+    app = valina()
   })
 
   afterEach(() => {
