@@ -1,6 +1,6 @@
 # cans
 
-Building MobX in Choo way
+Building MobX in [choo](https://github.com/yoshuawuyts/choo) way
 
 ## Quick Demo
 
