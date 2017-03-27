@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
-    "test": "mocha test/.setup.js test/*.test.js"
+    "build": "tsc",
+    "test": "npm run build && mocha test/.setup.js test/*.test.js"
   },
   "main": "lib/index.js",
   "author": {

@@ -1,4 +1,4 @@
-import valina from '../lib'
+import cans from '../lib'
 import { observable, action } from '../mobx'
 import React from 'react'
 import assert from 'power-assert'
@@ -6,7 +6,7 @@ import { mount, shallow } from 'enzyme'
 
 describe('Observer', () => {
 
-  const app = valina()
+  const app = cans()
 
   const counterStore = observable({
     namespace: 'counterStore',

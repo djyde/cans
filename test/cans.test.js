@@ -1,4 +1,4 @@
-import valina from '../lib'
+import cans from '../lib'
 import { observable, action } from '../mobx'
 import React from 'react'
 import assert from 'power-assert'
@@ -21,7 +21,7 @@ describe('cans', () => {
   const rootEl = document.querySelector('#app')
 
   beforeEach(() => {
-    app = valina()
+    app = cans()
   })
 
   afterEach(() => {
