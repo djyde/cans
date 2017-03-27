@@ -60,7 +60,7 @@ app.start(document.querySelector('#app'))
 
 ## APIs
 
-#### `cans()`
+#### `app = cans()`
 
 Create new `cans` application instance.
 
@@ -73,6 +73,11 @@ Registry MobX store.
 Registry router
 
 #### `app.observer(component: ({ stores, ...props }) => JSX.Element)`
+
+## See Also
+
+- [React-Router](https://github.com/ReactTraining/react-router)
+- [MobX](https://mobxjs.github.io/mobx/)
 
 # License
 
