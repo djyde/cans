@@ -1,7 +1,7 @@
 {
   "name": "cans",
-  "description": "Building MobX application in Choo way",
-  "version": "0.0.1",
+  "description": "Building React MobX application in Choo way",
+  "version": "0.0.2",
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "build": "tsc",
