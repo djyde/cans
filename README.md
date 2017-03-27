@@ -1,5 +1,9 @@
 # cans
 
+[![npm](https://img.shields.io/npm/v/cans.svg)](https://www.npmjs.com/package/cans)
+[![circle](https://circleci.com/gh/djyde/cans.svg?style=shield)](https://circleci.com/gh/djyde/cans)
+[![David](https://img.shields.io/david/djyde/cans.svg)]()
+
 Building React MobX application in [choo](https://github.com/yoshuawuyts/choo) way
 
 ## Quick Demo
