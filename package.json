@@ -1,11 +1,21 @@
 {
   "name": "cans",
   "description": "Building MobX application in Choo way",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "test": "mocha test/.setup.js test/*.test.js"
   },
+  "main": "lib/index.js",
+  "author": {
+    "name": "Randy",
+    "email": "randypriv@gmail.com"
+  },
+  "files": [
+    "lib",
+    "router.js",
+    "mobx.js"
+  ],
   "devDependencies": {
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
