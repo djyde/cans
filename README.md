@@ -9,49 +9,50 @@ Building React MobX application in [choo](https://github.com/yoshuawuyts/choo) w
 ## Quick Demo
 
 ```js
-import cans from 'cans'
+import cans, { inject, observer } from 'cans'
 import { observable, action } from 'cans/mobx' // MobX core
 import { BrowserRouter, Route } from 'cans/router' // react-router(v4) core
 
 const app = cans()
 
-// MobX observable
-const counterStore = observable({
-  namespace: 'counterStore',
+// model
+app.model({
+  namespace: 'counter',
 
-  // state
-  count: 0,
+  // MobX Observable
+  observable: observable({
+    // state
+    count: 0,
 
-  // action
-  incr: action.bound(function () {
-    this.count += 1
-  }),
-  decr: action.bound(function () {
-    this.count -= 1
+    // action
+    incr: action.bound(function () {
+      this.count += 1
+    }),
+
+    decr: action.bound(function () {
+      this.count -= 1
+    })
   })
 })
 
-// Registry stores
-app.store(counterStore)
-
-// View
-const Counter = app.observer(({ stores }) => {
+// view
+const Counter = inject('counter')(observer(({ counter }) => {
   return (
     <div>
-      <span>{stores.counterStore.count}</span>
-      <button onClick={stores.counterStore.incr}>+</button>
-      <button onClick={stores.counterStore.decr}>-</button>
+      <span>{counter.count}</span>
+      <button onClick={counter.incr}>+</button>
+      <button onClick={counter.decr}>-</button>
     </div>
   )
-})
+}))
 
+// router
 const route = () => (
   <BrowserRouter>
-    <Route path='/' component={Counter} />
+    <Route path='/counter' component={Counter} />
   </BrowserRouter>
 )
 
-// Registry route
 app.route(route)
 
 // mount the app
@@ -64,15 +65,13 @@ app.start(document.querySelector('#app'))
 
 Create new `cans` application instance.
 
-#### `app.store(MobXObservable)`
+#### `app.model(model: { namespace: string, observable: MobXObservable })`
 
-Registry MobX store.
+Registry app model.
 
-#### `app.route(ReactRouterComponent)`
+#### `app.route(() => ReactRouterElement)`
 
 Registry router
-
-#### `app.observer(component: ({ stores, ...props }) => JSX.Element)`
 
 ## See Also
 

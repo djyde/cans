@@ -1,4 +1,4 @@
-import cans from '../lib'
+import cans, { observer, inject } from '../lib'
 import { observable, action } from '../mobx'
 import React from 'react'
 import assert from 'power-assert'
@@ -8,53 +8,55 @@ describe('Observer', () => {
 
   const app = cans()
 
-  const counterStore = observable({
-    namespace: 'counterStore',
+  const counterModel = {
+    namespace: 'counter',
+    observable: observable({
+      // state
+      count: 0,
 
-    // state
-    count: 0,
-
-    // action
-    incr: action.bound(function () {
-      this.count += 1
-    }),
-    decr: action.bound(function () {
-      this.count -= 1
+      // action
+      incr: action.bound(function () {
+        this.count += 1
+      }),
+      decr: action.bound(function () {
+        this.count -= 1
+      })
     })
-  })
+  }
 
-  app.store(counterStore)
+  app.model(counterModel)
 
-  const Counter = app.observer(({ stores }) => {
+  const Counter = inject('counter')(observer(({ counter }) => {
     return (
       <div>
-        <span id='count'>{stores.counterStore.count}</span>
+        <span id='count'>{counter.count}</span>
         <Toolbar />
       </div>
     )
-  })
+  }))
 
-  const Toolbar = app.observer(({ stores }) => {
+  const Toolbar = inject('counter')(observer(({ counter }) => {
     return (
       <div>
-        <button onClick={stores.counterStore.incr}>+</button>
-        <button onClick={stores.counterStore.decr}>-</button>
+        <button onClick={counter.incr}>+</button>
+        <button onClick={counter.decr}>-</button>
       </div>
     )
-  })
+  }))
 
-  const wrapped = shallow(<Counter.wrappedComponent stores={{counterStore}} />)
+  const wrapped = shallow(<Counter.wrappedComponent counter={counterModel.observable} />)
 
   it('should increase count', done => {
-    counterStore.incr()
-    assert(wrapped.find('#count').first().text() === '1')
+    counterModel.observable.incr()
+    assert.equal(wrapped.find('#count').first().text(), '1')
     done()
   })
 
   it('should decre count', done => {
-    counterStore.decr()
-    assert(wrapped.find('#count').first().text() === '0')
-    done()
+    counterModel.observable.decr()
+    counterModel.observable.decr()
+    assert.equal(wrapped.find('#count').first().text(), '-1')
+    done()    
   })
 
 })

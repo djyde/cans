@@ -3,41 +3,37 @@ import { render } from 'react-dom'
 import { IObservable, observable } from 'mobx'
 import { Observer, inject, Provider, observer } from 'mobx-react'
 
-export interface ICansObservable extends IObservable {
-  namespace: string
+export interface ICansModel {
+  namespace: string,
+  observable: IObservable
 }
 
 export class Cans {
 
   private __routerComponent: JSX.Element = React.createElement('div', null, 'cans')
   private __mountedRoot?: HTMLElement
-  private stores: ICansObservable[] = []
+  private models: ICansModel[] = []
 
   private __getInjectList () {
-    return this.stores.map(store => store.namespace).filter(_ => _)
+    return this.models.map(model => model.namespace).filter(_ => _)
   }
 
   route (routeFunc: () => JSX.Element) {
     // wrap provider
     const providerProps = {}
-    this.stores.forEach(store => {
-      providerProps[store.namespace] = store
+    this.models.forEach(model => {
+      providerProps[model.namespace] = model.observable
     })
     this.__routerComponent = React.createElement(Provider, providerProps, routeFunc())
   }
 
-  store (store: ICansObservable) {
-    this.stores.push(store)
+  model (model: ICansModel) {
+    this.models.push(model)
   }
 
   start (el: HTMLElement) {
     render(this.__routerComponent, el)
     this.__mountedRoot = el
-  }
-
-  observer (view) {
-    const injection = inject((stores: ICansObservable[]) => ({ stores: stores }))
-    return injection(observer(view))
   }
 }
 
@@ -45,7 +41,10 @@ const createCansApp = () => {
   return new Cans()
 }
 
-export default createCansApp
+export {
+  observer,
+  inject
+}
 
 declare var module: any
-module.exports = createCansApp
+export default createCansApp

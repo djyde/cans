@@ -5,7 +5,8 @@
     "outDir": "lib",
     "target": "es5",
     "reactNamespace": "react",
-    "sourceMap": false
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
