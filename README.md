@@ -94,6 +94,10 @@ app.model({
 
 ```
 
+## Plugins
+
+- [cans-plugin-http](https://github.com/djyde/cans-plugin-http) HTTP (axios) plugin for cans
+
 ## APIs
 
 #### `app = cans()`
