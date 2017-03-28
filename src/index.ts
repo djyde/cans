@@ -38,10 +38,7 @@ export class Cans {
   route (routeFunc: () => JSX.Element) {
     // wrap provider
     const providerProps = {}
-    this.__models.forEach(model => {
-      providerProps[model.namespace] = typeof model.observable === 'function' ? model.observable(this) : model.observable
-    })
-    this.__routerComponent = React.createElement(Provider, providerProps, routeFunc())
+    this.__routerComponent = React.createElement(Provider, this.models, routeFunc())
   }
 
   model (model: ICansModel) {
