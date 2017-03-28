@@ -73,7 +73,7 @@ Registry app model.
 
 Registry router. The React router will be wrapped in `mobx-react`'s `<Provider>`.
 
-### `inject(view)`
+#### `inject(view)`
 
 mobx-react inject helper. Will inject the registried models wich will be pass to view props, and automatically wrapped the view with `observer`
 
