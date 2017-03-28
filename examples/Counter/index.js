@@ -1,22 +1,23 @@
 import React from 'react'
-import { observer, inject } from '../../lib'
+import { observer, inject, mobxInject } from '../../lib'
 
-const Counter = inject('counter')(observer(({ counter }) => {
+const Counter = inject(({ models }) => {
   return (
     <div>
-      <span>{counter.count}</span>
-      <Toolbar />
+      <span>{models.counter.count}</span>
+      <Toolbar title='test'/>
     </div>
   )
-}))
+})
 
-const Toolbar = inject('counter')(observer(({ counter }) => {
+const Toolbar = inject(({ models, title }) => {
   return (
     <div>
-      <button onClick={counter.incr}>+</button>
-      <button onClick={counter.decr}>-</button>
+      <div id='title'>{title}</div>
+      <button onClick={models.counter.incr}>+</button>
+      <button onClick={models.counter.decr}>-</button>
     </div>
   )
-}))
+})
 
 module.exports = Counter

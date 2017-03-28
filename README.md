@@ -9,7 +9,7 @@ Building React MobX application in [choo](https://github.com/yoshuawuyts/choo) w
 ## Quick Demo
 
 ```js
-import cans, { inject, observer } from 'cans'
+import cans, { inject } from 'cans'
 import { observable, action } from 'cans/mobx' // MobX core
 import { BrowserRouter, Route } from 'cans/router' // react-router(v4) core
 
@@ -36,12 +36,12 @@ app.model({
 })
 
 // view
-const Counter = inject('counter')(observer(({ counter }) => {
+const Counter = inject(({ models }) => {
   return (
     <div>
-      <span>{counter.count}</span>
-      <button onClick={counter.incr}>+</button>
-      <button onClick={counter.decr}>-</button>
+      <span>{models.counter.count}</span>
+      <button onClick={models.counter.incr}>+</button>
+      <button onClick={models.counter.decr}>-</button>
     </div>
   )
 }))
@@ -71,7 +71,11 @@ Registry app model.
 
 #### `app.route(() => ReactRouterElement)`
 
-Registry router
+Registry router. The React router will be wrapped in `mobx-react`'s `<Provider>`.
+
+### `inject(view)`
+
+mobx-react inject helper. Will inject the registried models wich will be pass to view props, and automatically wrapped the view with `observer`
 
 ## See Also
 

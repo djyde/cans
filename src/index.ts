@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { IObservable, observable } from 'mobx'
-import { Observer, inject, Provider, observer } from 'mobx-react'
+import { Observer, inject as mobxInject, Provider, observer } from 'mobx-react'
 
 export interface ICansModel {
   namespace: string,
@@ -41,9 +41,11 @@ const createCansApp = () => {
   return new Cans()
 }
 
+// model inject helper
+export const inject = (view) => mobxInject(models => ({ models }))(observer(view))
+
 export {
-  observer,
-  inject
+  observer
 }
 
 declare var module: any
