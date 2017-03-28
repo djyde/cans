@@ -59,13 +59,48 @@ app.route(route)
 app.start(document.querySelector('#app'))
 ```
 
+## Plugin system
+
+`cans` provides a plugin system. Plugins are used to inject custom object (maybe a `function` or `observable`) in `app.plugins`, which can be called in models' observable.
+
+`plugin` is a particular `model`. It has `namespace` and `observable`(may change the name further) too. 
+
+```js
+// example loggerPlugin
+
+const loggerPlugin = {
+  namespace: 'logger',
+
+  observable: app => {
+    return function (msg) {
+      console.log('[from logger]:', msg)
+    }
+  }
+}
+
+app.use(loggerPlugin)
+
+app.model({
+  namespace: 'foo',
+
+  observable: app => {
+    return observable({
+      click: action.bound(function () {
+        app.plugins.logger('log something...')
+      })
+    })
+  }
+})
+
+```
+
 ## APIs
 
 #### `app = cans()`
 
 Create new `cans` application instance.
 
-#### `app.model(model: { namespace: string, observable: MobXObservable })`
+#### `app.model(model: { namespace: string, observable: MobXObservable | (app: Cans) => MobXObservable })`
 
 Registry app model.
 
@@ -73,9 +108,19 @@ Registry app model.
 
 Registry router. The React router will be wrapped in `mobx-react`'s `<Provider>`.
 
+#### `app.use(plugin)`
+
 #### `inject(view)`
 
 mobx-react inject helper. Will inject the registried models wich will be pass to view props, and automatically wrapped the view with `observer`
+
+#### `app.models`
+
+return all registried models (observable)
+
+#### `app.plugins`
+
+return all registried plugins (observable or anything)
 
 ## examples
 

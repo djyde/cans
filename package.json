@@ -22,6 +22,7 @@
     "@types/react-dom": "^0.14.23",
     "@types/react-router-dom": "^4.0.1",
     "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.2.2",
     "babel-preset-react": "^6.23.0",
     "babel-register": "^6.24.0",
