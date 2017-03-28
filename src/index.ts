@@ -39,7 +39,7 @@ export class Cans {
     // wrap provider
     const providerProps = {}
     this.__models.forEach(model => {
-      providerProps[model.namespace] = model.observable
+      providerProps[model.namespace] = typeof model.observable === 'function' ? model.observable(this) : model.observable
     })
     this.__routerComponent = React.createElement(Provider, providerProps, routeFunc())
   }
