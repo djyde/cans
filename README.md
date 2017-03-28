@@ -97,6 +97,7 @@ app.model({
 ## Plugins
 
 - [cans-plugin-http](https://github.com/djyde/cans-plugin-http) HTTP (axios) plugin for cans
+- [cans-plugin-modal-store](https://github.com/djyde/cans-plugin-modal-store) cans plugin for creating modal stores
 
 ## APIs
 
@@ -122,7 +123,7 @@ mobx-react inject helper. Will inject the registried models wich will be pass to
 
 return all registried models (observable)
 
-#### `app.plugins`
+#### `app.plugins(plugin: { namespace: string, observable: (app: Cans) => any })`
 
 return all registried plugins (observable or anything)
 
