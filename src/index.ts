@@ -74,5 +74,4 @@ export {
   observer
 }
 
-declare var module: any
 export default createCansApp
