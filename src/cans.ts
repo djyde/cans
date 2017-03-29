@@ -2,9 +2,11 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { IObservable, observable } from 'mobx'
 import { Observer, inject as mobxInject, Provider, observer } from 'mobx-react'
+import { defineReadOnlyProperty, isProtected } from './utils'
 
 export interface ICansModel {
   namespace: string,
+  protected?: boolean,
   observable: (app: Cans) => IObservable | IObservable
 }
 
@@ -18,21 +20,31 @@ export interface ICansPluginObject {
 
 export interface ICansPlugin {
   namespace: string,
-  observable: any
+  protected?: boolean,
+  observable: (app: Cans) => any
 }
 
 export class Cans {
 
-  private __routerComponent: JSX.Element = React.createElement('div', null, 'cans')
+  private __routerComponent: JSX.Element = React.createElement('div')
   private __mountedRoot?: HTMLElement
-  private __plugins: ICansPlugin[] = []
-  private __models: ICansModel[] = []
 
-  public models: ICansModelObject = {}
-  public plugins: ICansPluginObject = {}
+  private __plugins: ICansPlugin[] = []
+  private __pluginsObject: ICansPluginObject = {}  
+
+  private __models: ICansModel[] = []
+  private __modelsObject: ICansModelObject = {}
 
   private __getInjectList () {
     return this.__models.map(model => model.namespace).filter(_ => _)
+  }
+
+  get models () {
+    return this.__modelsObject
+  }
+
+  get plugins () {
+    return this.__pluginsObject
   }
 
   route (routeFunc: () => JSX.Element) {
@@ -43,10 +55,12 @@ export class Cans {
 
   model (model: ICansModel) {
     // registry model
-    if (typeof model.observable === 'function') {
-      this.models[model.namespace] = model.observable(this)
+    const o = typeof model.observable === 'function' ? model.observable(this) : model.observable
+    if (isProtected(model)) {
+      // every model is protected by default
+      defineReadOnlyProperty(this.__modelsObject, model.namespace, o, 'This model is readonly')
     } else {
-      this.models[model.namespace] = model.observable
+      this.__modelsObject[model.namespace] = o
     }
     this.__models.push(model)
   }
@@ -58,7 +72,12 @@ export class Cans {
 
   use (plugin: ICansPlugin) {
     // registry plugin
-    this.plugins[plugin.namespace] = plugin.observable(this)
+    const o = plugin.observable(this)
+    if (isProtected(plugin)) {
+      defineReadOnlyProperty(this.__pluginsObject, plugin.namespace, o, 'This plugin is readonly')
+    } else {
+      this.__pluginsObject[plugin.namespace] = plugin.observable(this)
+    }
     this.__plugins.push(plugin)
   }
 }

@@ -22,6 +22,27 @@ describe('cans', () => {
 
   beforeEach(() => {
     app = cans()
+
+    app.model({
+      namespace: 'foo',
+      observable: observable({ data: 'foo' })
+    })
+
+    app.model({
+      namespace: 'public',
+      protected: false,
+      observable: observable({ data: 'foo' })
+    })
+
+    app.use({
+      namespace: 'bar',
+      observable: app => 'bar'
+    })
+
+    app.use({
+      namespace: 'public',
+      observable: app => 'bar'
+    })
   })
 
   afterEach(() => {
@@ -33,6 +54,28 @@ describe('cans', () => {
     it('should set route', done => {
       app.route(router)
       assert(app.__routerComponent)
+      done()
+    })
+  })
+
+  describe('safe', () => {
+    it('model should be readonly', done => {
+      assert.throws(() => { app.models.foo = 'bar' })
+      done()
+    })
+
+    it('can modify none exist model', done => {
+      assert.doesNotThrow(() => { app.models.blabla = 'bar' })
+      done()
+    })
+
+    it('plguins should be readonly', done => {
+      assert.throws(() => { app.plugins.bar = 'bar' })
+      done()
+    })
+
+    it('can modify none exist plugins', done => {
+      assert.doesNotThrow(() => { app.plugins.blabla = 'bar' })
       done()
     })
   })

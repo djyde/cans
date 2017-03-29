@@ -7,10 +7,12 @@
     "reactNamespace": "react",
     "sourceMap": false,
     "declaration": true,
+    "strictNullChecks": true,
     "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
-    "example"
+    "example",
+    "lib"
   ]
 }

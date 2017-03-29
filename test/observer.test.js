@@ -46,7 +46,7 @@ describe('Observer', () => {
       )
     })
 
-    const wrapped = shallow(<Counter.wrappedComponent models={{ counter: app.models.counter }} />)
+    const wrapped = shallow(<Counter.wrappedComponent models={ app.models } />)
 
     it('should increase count', done => {
       app.models.counter.incr()
