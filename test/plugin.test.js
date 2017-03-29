@@ -1,4 +1,4 @@
-import cans, { observer, inject } from '../lib'
+import cans, { observer, inject } from '../lib/cans'
 import { observable, action } from '../mobx'
 import React from 'react'
 import assert from 'power-assert'

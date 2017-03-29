@@ -5,10 +5,10 @@
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "build": "tsc",
-    "test": "npm run build && mocha test/.setup.js test/*.test.js -R spec"
+    "test": "rm -rf lib && npm run build && mocha test/.setup.js test/*.test.js -R spec"
   },
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/cans.js",
+  "typings": "lib/cans.d.ts",
   "author": {
     "name": "Randy",
     "email": "randypriv@gmail.com"
