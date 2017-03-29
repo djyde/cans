@@ -1,12 +1,17 @@
 - Introduction
+  - [Why MobX and React](/introduction/why-mobx-and-react)
   - [Why cans?](/introduction/why-cans)
-  - [Getting started](/introduction/gettings-started)
+  - [Getting started](/introduction/getting-started)
 
 - Concepts
   - [Model](/concepts/model)
-  - [View](/concepts/view)
+  <!--- [View](/concepts/view)-->
   - [Router](/concepts/router)
   - [Plugin](/concepts/plugin)
 
+- Advanced
+  - [Unit Test](/advanced/unit-test)
+
 - APIs
-  - [cans app instance](/api/instance)
+  - [cans](/api/instance)
+  - [inject](/api/inject)
