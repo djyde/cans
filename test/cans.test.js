@@ -41,6 +41,7 @@ describe('cans', () => {
 
     app.use({
       namespace: 'public',
+      protected: false,
       observable: app => 'bar'
     })
   })
@@ -69,6 +70,11 @@ describe('cans', () => {
       done()
     })
 
+    it('can modify none protected model', done => {
+      assert.doesNotThrow(() => { app.models.public = 'foooo' })
+      done()
+    })
+
     it('plguins should be readonly', done => {
       assert.throws(() => { app.plugins.bar = 'bar' })
       done()
@@ -78,6 +84,12 @@ describe('cans', () => {
       assert.doesNotThrow(() => { app.plugins.blabla = 'bar' })
       done()
     })
+
+    it('can modify none protected plugins', done => {
+      assert.doesNotThrow(() => { app.plugins.public = 'foooo' })
+      done()
+    })
+
   })
 
   describe('#start', () => {
