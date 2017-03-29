@@ -6,6 +6,7 @@
     "target": "es5",
     "reactNamespace": "react",
     "sourceMap": false,
+    "declaration": true,
     "allowSyntheticDefaultImports": true
   },
   "exclude": [

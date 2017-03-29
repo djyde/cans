@@ -8,6 +8,7 @@
     "test": "npm run build && mocha test/.setup.js test/*.test.js -R spec"
   },
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "author": {
     "name": "Randy",
     "email": "randypriv@gmail.com"
