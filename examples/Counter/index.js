@@ -1,5 +1,5 @@
 import React from 'react'
-import { observer, inject, mobxInject } from '../../lib'
+import { observer, inject, mobxInject } from '../../lib/cans'
 
 const Counter = inject(({ models }) => {
   return (

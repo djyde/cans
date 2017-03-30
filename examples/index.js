@@ -1,4 +1,4 @@
-import cans from '../lib'
+import cans from '../lib/cans'
 import { BrowserRouter, Route } from '../router'
 import React from 'react'
 import { observable, action } from '../mobx'
