@@ -1,7 +1,7 @@
 {
   "name": "cans",
   "description": "A framework for building React MobX application",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "build": "tsc",
