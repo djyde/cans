@@ -7,7 +7,7 @@ import { defineReadOnlyProperty, isProtected } from './utils'
 export interface ICansModel {
   namespace: string,
   protected?: boolean,
-  observable: (app: Cans) => IObservable | IObservable
+  observable: (app: Cans) => IObservable | IObservable | object
 }
 
 export interface ICansModelObject {
