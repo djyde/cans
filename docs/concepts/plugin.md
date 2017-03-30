@@ -2,7 +2,7 @@
 
 Plugin is powerful and useful in cans. It can inject everything in your cans app instance. Or only simply return any value that can be access in `app.plugins`.
 
-*Plugins injection behavior will be constrained in futher release. For example, we will provide a method to create custom `model` in `app.models`, instead of let the plugin modify the `app.moddels` directory. Besides, the property `observable` will be renamed, while it not only can return an observable.*
+*Plugins injection behavior will be constrained in futher release. For example, we will provide a method to create custom `model` in `app.models`, instead of let the plugin modify the `app.moddels` directly. Besides, the property `observable` will be renamed, while it not only can return an observable.*
 
 #### Write a plugin
 

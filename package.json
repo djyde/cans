@@ -5,6 +5,7 @@
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "build": "tsc",
+    "doc": "docsify serve ./docs",
     "test": "npm run build && mocha test/.setup.js test/*.test.js -R spec"
   },
   "main": "lib/cans.js",
