@@ -26,6 +26,6 @@ Apply the route.
 
 See [router](/concepts/router)
 
-### app.start(el: HTMLElement)
+### app.start(el: Element)
 
 Mount the app.
