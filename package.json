@@ -6,7 +6,8 @@
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "build": "tsc",
     "doc": "docsify serve ./docs",
-    "test": "npm run build && mocha test/.setup.js test/*.test.js -R spec"
+    "test": "npm run build && mocha test/.setup.js test/*.test.js -R spec",
+    "patch": "npm test && npm run build && npm version patch"
   },
   "main": "lib/cans.js",
   "typings": "lib/cans.d.ts",
