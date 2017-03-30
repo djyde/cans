@@ -11,6 +11,10 @@
 
 cans is a new framework but growing fastly. Glad to get your **watch** or **star** if you think the idea behind cans is good. 
 
+### Documents
+
+- [Getting Started](/introduction/getting-started)
+
 ### Posts
 
 - [cans: A framework for building React MobX application](https://medium.com/@djyde/cans-a-framework-for-building-react-mobx-application-78bff88c3b3f)
