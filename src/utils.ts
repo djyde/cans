@@ -1,5 +1,6 @@
 export const defineReadOnlyProperty = (scope: object, name: string, value: any, message: string = 'property is readonly') => {
   Object.defineProperty(scope, name, {
+    enumerable: true,
     get() {
       return value
     },
