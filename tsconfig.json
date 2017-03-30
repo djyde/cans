@@ -8,11 +8,13 @@
     "sourceMap": false,
     "declaration": true,
     "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",
     "example",
-    "lib"
+    "lib",
+    "test"
   ]
 }
