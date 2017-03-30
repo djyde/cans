@@ -27,7 +27,7 @@ export interface ICansPlugin {
 export class Cans {
 
   private __routerComponent: JSX.Element = React.createElement('div')
-  private __mountedRoot?: Element
+  private __mountedRoot?: Element | null
 
   private __plugins: ICansPlugin[] = []
   private __pluginsObject: ICansPluginObject = {}  
@@ -65,7 +65,7 @@ export class Cans {
     this.__models.push(model)
   }
 
-  start (el: Element) {
+  start (el: Element | null = null) {
     render(this.__routerComponent, el)
     this.__mountedRoot = el
   }
