@@ -1,31 +1,54 @@
 # Plugin
 
-Plugin is powerful and useful in cans. It can inject everything in your cans app instance. Or only simply return any value that can be access in `app.plugins`.
+Plugin is powerful and useful in cans. It can inject everything in your cans app instance. 
 
-*Plugins injection behavior will be constrained in futher release. For example, we will provide a method to create custom `model` in `app.models`, instead of let the plugin modify the `app.moddels` directly. Besides, the property `observable` will be renamed, while it not only can return an observable.*
+#### Writing a plugin
 
-#### Write a plugin
-
-A cans plugin is actually a particular model. They have theire `namespace` and `observable` too. Suppose we want to log our information somewhere we need, we can write a plugin for this:
+A cans plugin is a function that receive two arguments: `app` and possible `options`:
 
 ```js
-const loggerPlugin = {
-  namespace 'logger',
-  observable: app => msg => {
-    somewhere.log(msg)
+const loggerPlugin = (app, options) => {
+  // add function in app instance
+  app.logger = (msg) => {
+    console.log('[from logger]:', msg)
   }
 }
 
-app.use(loggerPlugin)
+const modalStorePlugin = (app, options) => {
+  // registry a model
+  const observableMap = {}
+  options.modalNames.forEach(name => {
+    observableMap[name] = observable({
+      visible: false,
 
-app.model({
-  namespace: 'foo',
-  observable: app => observable({
-    click: action.bound(function () {
-      app.plugins.logger('be clicked')
+      show: action.bound(function () {
+        this.visible = true
+      }),
+
+      hide: aciton.bound(function () {
+        this.visible = false
+      })
     })
   })
-})
+
+  app.model({
+    namespace: 'modals',
+    observable: observableMap
+  })
+}
+```
+
+#### Using a plugin
+
+```js
+const app = cans()
+
+app.use(loggerPlugin)
+
+// using plugin with options
+app.use(modalStorePlugin, { modalNames: ['createUser'] }) 
+// app.models.modals is now registered.
+
 ```
 
 #### Test the plugin
