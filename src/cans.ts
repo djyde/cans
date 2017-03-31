@@ -19,18 +19,13 @@ export interface ICansPluginObject {
 }
 
 export interface ICansPlugin {
-  namespace: string,
-  protected?: boolean,
-  observable: (app: Cans) => any
+  (app: Cans, options: any): void
 }
 
 export class Cans {
 
   private __routerComponent: JSX.Element = React.createElement('div')
   private __mountedRoot?: Element | null
-
-  private __plugins: ICansPlugin[] = []
-  private __pluginsObject: ICansPluginObject = {}  
 
   private __models: ICansModel[] = []
   private __modelsObject: ICansModelObject = {}
@@ -41,10 +36,6 @@ export class Cans {
 
   get models () {
     return this.__modelsObject
-  }
-
-  get plugins () {
-    return this.__pluginsObject
   }
 
   route (routeFunc: () => JSX.Element) {
@@ -70,15 +61,8 @@ export class Cans {
     this.__mountedRoot = el
   }
 
-  use (plugin: ICansPlugin) {
-    // registry plugin
-    const o = plugin.observable(this)
-    if (isProtected(plugin)) {
-      defineReadOnlyProperty(this.__pluginsObject, plugin.namespace, o, 'This plugin is readonly')
-    } else {
-      this.__pluginsObject[plugin.namespace] = plugin.observable(this)
-    }
-    this.__plugins.push(plugin)
+  use (plugin: ICansPlugin, options?) {
+    plugin(this, options)
   }
 }
 

@@ -33,17 +33,6 @@ describe('cans', () => {
       protected: false,
       observable: observable({ data: 'foo' })
     })
-
-    app.use({
-      namespace: 'bar',
-      observable: app => 'bar'
-    })
-
-    app.use({
-      namespace: 'public',
-      protected: false,
-      observable: app => 'bar'
-    })
   })
 
   afterEach(() => {
@@ -74,22 +63,6 @@ describe('cans', () => {
       assert.doesNotThrow(() => { app.models.public = 'foooo' })
       done()
     })
-
-    it('plguins should be readonly', done => {
-      assert.throws(() => { app.plugins.bar = 'bar' })
-      done()
-    })
-
-    it('can modify none exist plugins', done => {
-      assert.doesNotThrow(() => { app.plugins.blabla = 'bar' })
-      done()
-    })
-
-    it('can modify none protected plugins', done => {
-      assert.doesNotThrow(() => { app.plugins.public = 'foooo' })
-      done()
-    })
-
   })
 
   describe('#start', () => {

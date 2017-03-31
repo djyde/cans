@@ -4,22 +4,18 @@ import React from 'react'
 import assert from 'power-assert'
 import { mount, shallow } from 'enzyme'
 
-const httpPlugin = {
-  namespace: 'http',
-  observable: app => {
-    return (url) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('blablabla')
-        }, 1000)
-      })
-    }
-  }
+const httpPlugin = (app, options) => {
+  app.http = url => new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(options.response)
+    }, 1000)
+  })
 }
+
 describe('plugin system', () => {
   const app = cans()
 
-  app.use(httpPlugin)
+  app.use(httpPlugin, { response: 'fake response' })
 
   app.model({
     namespace: 'weather',
@@ -32,7 +28,7 @@ describe('plugin system', () => {
         }),
 
         fetchWeather: action.bound(async function () {
-          const data = await app.plugins.http('blablabla')
+          const data = await app.http('blablabla')
           this.applyData(data)
         })
       })
@@ -49,7 +45,7 @@ describe('plugin system', () => {
   })
 
   it('should use plugin', done => {
-    assert(app.plugins.http)
+    assert(app.http)
     done()
   })
 
@@ -58,13 +54,13 @@ describe('plugin system', () => {
       await app.models.weather.fetchWeather()
     } catch (e) {
       done(e)
-    }  
+    }
   })
 
   it('should change weather data', done => {
-    const wrapped = shallow(<Weather.wrappedComponent models={{ weather: app.models.weather }} />)
+    const wrapped = shallow(<Weather.wrappedComponent models={app.models} />)
 
-    assert.equal(wrapped.find('#data').first().text(), 'blablabla')
+    assert.equal(wrapped.find('#data').first().text(), 'fake response')
 
     done()
   })
