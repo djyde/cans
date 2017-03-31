@@ -49,7 +49,7 @@ export class Cans {
     const o = typeof model.observable === 'function' ? model.observable(this) : model.observable
     if (isProtected(model)) {
       // every model is protected by default
-      defineReadOnlyProperty(this.__modelsObject, model.namespace, o, 'This model is readonly')
+      defineReadOnlyProperty(this.__modelsObject, model.namespace, o, `model [${model.namespace}] is protected.`)
     } else {
       this.__modelsObject[model.namespace] = o
     }
