@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { IObservable, observable } from 'mobx'
-import { Observer, inject as mobxInject, Provider, observer } from 'mobx-react'
+import { inject as mobxInject, Provider, observer } from 'mobx-react'
 import { defineReadOnlyProperty, isProtected } from './utils'
 
 export interface ICansModel {
@@ -72,9 +72,5 @@ const createCansApp = () => {
 
 // model inject helper
 export const inject = (view) => mobxInject(models => ({ models }))(observer(view))
-
-export {
-  observer
-}
 
 export default createCansApp
