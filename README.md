@@ -1,6 +1,7 @@
 <img width="256" height="128" alt="logo" src="https://cloud.githubusercontent.com/assets/914329/24503261/e6868e0a-1583-11e7-8a98-7dd24c564b8b.png" />
 
 [![npm](https://img.shields.io/npm/v/cans.svg)](https://www.npmjs.com/package/cans)
+[![npm](https://img.shields.io/npm/dm/cans.svg)](https://www.npmjs.com/package/cans)
 [![circle](https://circleci.com/gh/djyde/cans.svg?style=shield)](https://circleci.com/gh/djyde/cans)
 [![David](https://img.shields.io/david/djyde/cans.svg)]()
 
