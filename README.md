@@ -71,6 +71,8 @@ app.start(document.querySelector('#app'))
 
 ## Examples
 
+- [cans-example-dashboard](https://github.com/cansjs/cans-example-dashboard/)
+
 👀 See more examples in [cans-example](https://github.com/djyde/cans-example)
 
 ## See Also

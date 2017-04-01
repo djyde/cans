@@ -19,7 +19,11 @@ cans is a new framework but growing fastly. Glad to get your **watch** or **star
 
 - [cans: A framework for building React MobX application](https://medium.com/@djyde/cans-a-framework-for-building-react-mobx-application-78bff88c3b3f)
 
+- [Building CURD in a few minutes with cans and antd](https://medium.com/@djyde/building-curd-in-a-few-minutes-with-cans-and-antd-ba2b08a3919f)
+
 ### Examples
+
+- [cans-example-dashboard](https://github.com/cansjs/cans-example-dashboard/)
 
 👀 See more examples in [cans-example](https://github.com/djyde/cans-example)
 
