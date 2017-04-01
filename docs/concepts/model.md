@@ -58,3 +58,28 @@ const counterModel = inject(({ models }) => (
 ```
 
 The views that had been wrapped with `inject` will automatically wrapped with mobx-react's `observer`.
+
+### Protected Model
+
+All the models are protected by default, which means that all the models regitered by `app.model()` cannot be change:
+
+```js
+app.model({
+  namespace: 'foo',
+  observable: /** ... **/
+})
+
+app.models.foo = {} // Throw error
+```
+
+In some cases you don't want your models be protected. Just set the `protected` to `false`:
+
+```js
+app.model({
+  namespace: 'foo',
+  protected: false,
+  observable: /** ... **/
+})
+
+app.models.foo = {} // it's ok
+```
