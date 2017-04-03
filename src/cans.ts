@@ -70,7 +70,7 @@ export interface ICansOptions {
   useStrict?: boolean
 }
 
-const createCansApp = (options: ICansOptions) => {
+const createCansApp = (options: ICansOptions = {}) => {
   if (options.useStrict === true) {
     useStrict(true)
   }
