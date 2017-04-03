@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { IObservable, observable } from 'mobx'
+import { IObservable, observable, useStrict } from 'mobx'
 import { inject as mobxInject, Provider, observer } from 'mobx-react'
 import { defineReadOnlyProperty, isProtected } from './utils'
 
@@ -66,7 +66,14 @@ export class Cans {
   }
 }
 
-const createCansApp = () => {
+export interface ICansOptions {
+  useStrict?: boolean
+}
+
+const createCansApp = (options: ICansOptions) => {
+  if (options.useStrict === true) {
+    useStrict(true)
+  }
   return new Cans()
 }
 
