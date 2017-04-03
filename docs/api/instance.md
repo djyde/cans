@@ -1,8 +1,12 @@
 # Instance
 
-### app = cans()
+### app = cans(options)
 
 Return a cans app instance
+
+#### options
+
+- useStrict: boolean. Enable MobX strict mode.
 
 ### app.model(model)
 
