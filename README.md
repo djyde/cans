@@ -75,6 +75,16 @@ app.start(document.querySelector('#app'))
 
 👀 See more examples in [cans-example](https://github.com/djyde/cans-example)
 
+## Build
+
+``` bash
+$ yarn
+
+$ yarn test # unit-test
+
+$ yarn run example # run example
+```
+
 ## See Also
 
 - [React-Router](https://github.com/ReactTraining/react-router)
