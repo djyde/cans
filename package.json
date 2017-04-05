@@ -1,7 +1,7 @@
 {
   "name": "cans",
   "description": "A framework for building React MobX application",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "scripts": {
     "example": "webpack-dev-server --open --config examples/webpack.config.js",
     "clean": "rm -rf lib/",
