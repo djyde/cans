@@ -12,7 +12,6 @@ Let see a simplest counter application write in cans:
 
 ```js
 import cans, { inject } from 'cans'
-import { observable, action } from 'cans/mobx'
 import { BrowserRouter, Route } from 'cans/router'
 
 const app = cans()
@@ -20,17 +19,17 @@ const app = cans()
 // model
 app.model({
   namespace: 'counter',
-  observable: observable({
-    count: 0,
-    
-    incr: action.bound(function () {
+  state: {
+    count: 0
+  },
+  actions: {
+    incr() {
       this.count += 1
-    }),
-    
-    decr: action.bound(function () {
+    },
+    decr() {
       this.count -= 1
-    })
-  })
+    }
+  }
 })
 
 // view

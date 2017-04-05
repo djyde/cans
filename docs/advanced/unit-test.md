@@ -17,24 +17,24 @@ Firstly, write a counter model:
 
 ```js
 // app/models/counter.js
+const counterStore = {
+  state: {
+    count: 0
+  },
+  actions: {
+    incr() {
+      this.count += 1
+    },
 
-import { observable, action } from 'cans/mobx'
-
-const counterStore = observable({
-  count: 0,
-
-  incr: action.bound(function () {
-    this.count += 1
-  }),
-
-  decr: action.bound(function () {
-    this.count -= 1
-  })
-})
+    decr() {
+      this.count -= 1
+    }
+  }
+}
 
 export default {
   namespace: 'counter',
-  observable: counterStore
+  ...counterStore
 }
 ```
 

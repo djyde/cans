@@ -1,12 +1,19 @@
 # Model
 
-`model` in cans is an object contains `namespace` and `observable`:
+`model` in cans is an object contains `namespace`, `state` and `actions`:
 
 ```js
 import { observable } from 'cans/mobx'
 const counterModel = {
   namespace: 'counter',
-  observable: observable({ count: 0 })
+  state: {
+    count: 0
+  },
+  actions: {
+    incr() {
+      /** ... **/
+    }
+  }
 }
 
 app.model(counterModel)
@@ -16,27 +23,27 @@ All models that had been registry by `app.model()` will define a observable prop
 
 #### Communication between models
 
-You can also pass a high order function to `observable`, which receives an `app` instance. That means you could do a lot with app instance. Such as accessing other models:
+You can also pass a high order function to `actions`, which receives an `app` instance. That means you could do a lot with app instance. Such as accessing other models:
 
 ```js
-import { observable, action } from 'cans/mobx'
-
 const homepageModel = {
   namespace: 'homepage',
-  observable: observable({
-    posts: [],
-    fetch: action.bound(function() {
+  state: {
+    posts: []
+  },
+  actions: {
+    fetch() {
       this.posts = ['blablabla']
-    })
-  })
+    }
+  }
 }
 
 const counterModel = {
   namespace: 'counter',
-  observable: app => observable({
-    refresh: action.bound(function () {
-      app.models.homepage.fetch() // access homepage model
-    })
+  actions: app => ({
+    refresh() {
+      app.models.hompage.fetch() // access homepage model
+    }
   })
 }
 
@@ -58,6 +65,27 @@ const counterModel = inject(({ models }) => (
 ```
 
 The views that had been wrapped with `inject` will automatically wrapped with mobx-react's `observer`.
+
+### Using MobX Observable directory
+
+You could pass a MobX Observable to model instead of passing `state` and `actions`:
+
+```js
+class Store {
+  @observable count = 0
+
+  @action incr = () => {
+    this.count += 1
+  }
+}
+
+const store = new Store()
+
+export default {
+  namespace: 'counter',
+  observable: store
+}
+```
 
 ### Protected Model
 

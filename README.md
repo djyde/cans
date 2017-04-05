@@ -11,33 +11,28 @@ A framework for building React MobX application.
 
 ```js
 import cans, { inject } from 'cans'
-import { observable, action } from 'cans/mobx' // MobX core
-import { BrowserRouter, Route } from 'cans/router' // react-router(v4) core
+import { BrowserRouter, Route } from 'cans/router'
 
 const app = cans()
 
 // model
 app.model({
   namespace: 'counter',
-
-  // MobX Observable
-  observable: observable({
-    // state
-    count: 0,
-
-    // action
-    incr: action.bound(function () {
+  state: {
+    count: 0
+  },
+  actions: {
+    incr() {
       this.count += 1
-    }),
-
-    decr: action.bound(function () {
+    },
+    decr() {
       this.count -= 1
-    })
-  })
+    }
+  }
 })
 
 // view
-const Counter = inject(({ models }) => {
+const Counter = inject(({ models })) => {
   return (
     <div>
       <span>{models.counter.count}</span>
@@ -45,19 +40,18 @@ const Counter = inject(({ models }) => {
       <button onClick={models.counter.decr}>-</button>
     </div>
   )
-}))
+}
 
 // router
 const route = () => (
   <BrowserRouter>
-    <Route path='/counter' component={Counter} />
+    <Route path='/' component={Counter} />
   </BrowserRouter>
 )
-
 app.route(route)
 
 // mount the app
-app.start(document.querySelector('#app'))
+app.start(document.querySelector('#root'))
 ```
 
 ## Documents
