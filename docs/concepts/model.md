@@ -66,7 +66,7 @@ const counterModel = inject(({ models }) => (
 
 The views that had been wrapped with `inject` will automatically wrapped with mobx-react's `observer`.
 
-### Using MobX Observable directory
+### Using MobX Observable directly
 
 You could pass a MobX Observable to model instead of passing `state` and `actions`:
 
