@@ -118,4 +118,45 @@ describe('Observer', () => {
     })
   })
 
+  describe('state/action', () => {
+    const app = cans()
+
+    const testPlugin = app => {
+      app.test = 'foo'
+    }
+
+    app.use(testPlugin)
+
+    app.model({
+      namespace: 'counter',
+      state: {
+        count: 0,
+        title: ''
+      },
+      actions: appInstance => ({
+        incr() {
+          this.count += 1
+        },
+        decr() {
+          this.count -= 1
+        },
+        setTitle() {
+          this.title = appInstance.test
+        }
+      })
+    })
+
+    it('should increase count', done => {
+      app.models.counter.incr()
+      assert.equal(app.models.counter.count, 1)
+      done()
+    })
+
+    it('should get app instance in action', done => {
+      app.models.counter.setTitle()
+      assert.equal(app.models.counter.title, 'foo')
+      done()
+    })
+
+  })
 })

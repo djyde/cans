@@ -49,12 +49,14 @@ describe('plugin system', () => {
     done()
   })
 
-  it('should fetch weather data', async function () {
-    try {
-      await app.models.weather.fetchWeather()
-    } catch (e) {
-      done(e)
-    }
+  it('should fetch weather data', done => {
+    app.models.weather.fetchWeather()
+      .then(res => {
+        done(res)
+      })
+      .catch(e => {
+        done(e)
+      })
   })
 
   it('should change weather data', done => {

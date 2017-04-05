@@ -1,13 +1,15 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { IObservable, observable, useStrict } from 'mobx'
+import { IObservable, observable, useStrict, extendObservable, action } from 'mobx'
 import { inject as mobxInject, Provider, observer } from 'mobx-react'
 import { defineReadOnlyProperty, isProtected } from './utils'
 
 export interface ICansModel {
   namespace: string,
   protected?: boolean,
-  observable: any
+  observable?: any,
+  actions?: { [name: string]: (app: Cans) => () => void } | { [name: string]: () => void },
+  state?: { [name: string]: any }
 }
 
 export interface ICansModelObject {
@@ -22,13 +24,35 @@ export interface ICansPlugin {
   (app: Cans, options: any): void
 }
 
+const modelToObservable = (app: Cans, model: ICansModel) => {
+  let o = extendObservable({})
+  if (model.observable) {
+    o = typeof model.observable === 'function' ? model.observable(app) : model.observable
+  }
+
+  if (model.state) {
+    extendObservable(o, model.state)
+  }
+
+  if (model.actions) {
+    const actions = typeof model.actions === 'function' ? model.actions(app) : model.actions
+    for (let name in actions) {
+      extendObservable(o, {
+        [name]: action.bound(actions[name] as any)
+      })
+    }
+  }
+
+  return o
+}
+
 export class Cans {
 
   private __routerComponent: JSX.Element = React.createElement('div')
   private __mountedRoot?: Element | null
 
   private __models: ICansModel[] = []
-  private __modelsObject: ICansModelObject = {}
+  private __modelsObject = {}
 
   private __getInjectList () {
     return this.__models.map(model => model.namespace).filter(_ => _)
@@ -46,7 +70,7 @@ export class Cans {
 
   model (model: ICansModel) {
     // registry model
-    const o = typeof model.observable === 'function' ? model.observable(this) : model.observable
+    const o = modelToObservable(this, model)
     if (isProtected(model)) {
       // every model is protected by default
       defineReadOnlyProperty(this.__modelsObject, model.namespace, o, `model [${model.namespace}] is protected.`)
