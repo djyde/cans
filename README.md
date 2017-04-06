@@ -58,6 +58,12 @@ app.start(document.querySelector('#root'))
 
 - [Dodcument](http://cans.js.org)
 
+### Posts
+
+- [cans: A framework for building React MobX application](https://medium.com/@djyde/cans-a-framework-for-building-react-mobx-application-78bff88c3b3f)
+
+- [Building CRUD in a few minutes with cans and antd](https://medium.com/@djyde/building-curd-in-a-few-minutes-with-cans-and-antd-ba2b08a3919f)
+
 ## Plugins
 
 - [cans-plugin-http](https://github.com/djyde/cans-plugin-http) HTTP (axios) plugin for cans

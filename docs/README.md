@@ -3,6 +3,7 @@
 > A framework for building React / MobX application.
 
 [![npm](https://img.shields.io/npm/v/cans.svg)](https://www.npmjs.com/package/cans)
+[![npm](https://img.shields.io/npm/dm/cans.svg)](https://www.npmjs.com/package/cans)
 [![circle](https://circleci.com/gh/djyde/cans.svg?style=shield)](https://circleci.com/gh/djyde/cans)
 [![David](https://img.shields.io/david/djyde/cans.svg)]()
 
@@ -19,7 +20,7 @@ cans is a new framework but growing fastly. Glad to get your **watch** or **star
 
 - [cans: A framework for building React MobX application](https://medium.com/@djyde/cans-a-framework-for-building-react-mobx-application-78bff88c3b3f)
 
-- [Building CURD in a few minutes with cans and antd](https://medium.com/@djyde/building-curd-in-a-few-minutes-with-cans-and-antd-ba2b08a3919f)
+- [Building CRUD in a few minutes with cans and antd](https://medium.com/@djyde/building-curd-in-a-few-minutes-with-cans-and-antd-ba2b08a3919f)
 
 ### Examples
 
