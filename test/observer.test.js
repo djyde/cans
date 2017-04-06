@@ -118,7 +118,7 @@ describe('Observer', () => {
     })
   })
 
-  describe('state/action', () => {
+  describe('mobx property', () => {
     const app = cans()
 
     const testPlugin = app => {
@@ -143,19 +143,33 @@ describe('Observer', () => {
         setTitle() {
           this.title = appInstance.test
         }
+      }),
+      computed: {
+        content() {
+          return this.title + this.count
+        }
+      }
+    })
+
+    describe('state/action', () => {
+      it('should increase count', done => {
+        app.models.counter.incr()
+        assert.equal(app.models.counter.count, 1)
+        done()
+      })
+
+      it('should get app instance in action', done => {
+        app.models.counter.setTitle()
+        assert.equal(app.models.counter.title, 'foo')
+        done()
       })
     })
 
-    it('should increase count', done => {
-      app.models.counter.incr()
-      assert.equal(app.models.counter.count, 1)
-      done()
-    })
-
-    it('should get app instance in action', done => {
-      app.models.counter.setTitle()
-      assert.equal(app.models.counter.title, 'foo')
-      done()
+    describe('computed', () => {
+      it('should calculate computed value', done => {
+        assert.equal(app.models.counter.content, app.models.counter.title + app.models.counter.count)
+        done()
+      })
     })
 
   })

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { IObservable, observable, useStrict, extendObservable, action } from 'mobx'
+import { IObservable, observable, useStrict, extendObservable, action, computed } from 'mobx'
 import { inject as mobxInject, Provider, observer } from 'mobx-react'
 import { defineReadOnlyProperty, isProtected } from './utils'
 
@@ -9,7 +9,8 @@ export interface ICansModel {
   protected?: boolean,
   observable?: any,
   actions?: { [name: string]: (app: Cans) => () => void } | { [name: string]: () => void },
-  state?: { [name: string]: any }
+  state?: { [name: string]: any },
+  computed?: { [name: string]: () => any }
 }
 
 export interface ICansModelObject {
@@ -30,15 +31,26 @@ const modelToObservable = (app: Cans, model: ICansModel) => {
     o = typeof model.observable === 'function' ? model.observable(app) : model.observable
   }
 
+  // apply state
   if (model.state) {
     extendObservable(o, model.state)
   }
 
+  // apply actions
   if (model.actions) {
     const actions = typeof model.actions === 'function' ? model.actions(app) : model.actions
     for (let name in actions) {
       extendObservable(o, {
         [name]: action.bound(actions[name] as any)
+      })
+    }
+  }
+
+  // apply computed
+  if (model.computed) {
+    for (let name in model.computed) {
+      extendObservable(o, {
+        [name]: computed(model.computed[name])
       })
     }
   }
