@@ -1,6 +1,6 @@
 # Model
 
-`model` in cans is an object contains `namespace`, `state` and `actions`:
+`model` in cans is an object contains `namespace`, `state`, `actions` and `computed`:
 
 ```js
 import { observable } from 'cans/mobx'
@@ -12,6 +12,11 @@ const counterModel = {
   actions: {
     incr() {
       /** ... **/
+    }
+  },
+  computed: {
+    content() {
+      return 'Totally' + this.count
     }
   }
 }

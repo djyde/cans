@@ -28,6 +28,11 @@ app.model({
     decr() {
       this.count -= 1
     }
+  },
+  computed: {
+    content() {
+      return `Count: ${this.count}`
+    }
   }
 })
 
@@ -35,7 +40,7 @@ app.model({
 const Counter = inject(({ models })) => {
   return (
     <div>
-      <span>{models.counter.count}</span>
+      <span>{models.counter.content}</span>
       <button onClick={models.counter.incr}>+</button>
       <button onClick={models.counter.decr}>-</button>
     </div>
