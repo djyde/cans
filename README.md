@@ -61,7 +61,7 @@ app.start(document.querySelector('#root'))
 
 ## Documents
 
-- [Dodcument](http://cans.js.org)
+- [Document](http://cans.js.org)
 
 ### Posts
 
