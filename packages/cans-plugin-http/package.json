@@ -1,0 +1,21 @@
+{
+  "name": "cans-plugin-http",
+  "version": "0.0.6",
+  "description": "HTTP (axios) plugin for cans",
+  "main": "dist/cansPluginHttp.common.js",
+  "unpkg": "dist/cansPluginHttp.js",
+  "scripts": {
+    "test": "mocha test/",
+    "dist": "bili --format umd --format cjs --browser --name \"cansPluginHttp\"",
+    "prepublish": "npm test && npm run dist"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cans": "^0.0.12"
+  },
+  "devDependencies": {
+    "bili": "^0.15.4",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2"
+  }
+}
